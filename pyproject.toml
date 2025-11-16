@@ -16,6 +16,4 @@ dependencies = [
 bsort = "bsort.main:app"
 
 [tool.setuptools]
-# Ini memberitahu Python di mana menemukan kode Anda
-packages = ["bsort"]
-package_dir = {"" = "src"}
+package-dir = {"" = "src"}
