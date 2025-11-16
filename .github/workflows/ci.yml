@@ -1,48 +1,47 @@
 name: Python CI
+
 on: [push, pull_request]
 
 jobs:
-  # ---------------------------------------------------
-  # JOB 1: LINTING (SUPER CEPAT, JALAN DULUAN)
-  # ---------------------------------------------------
-  lint:
+  lint-test-build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.10"
+          python-version: "3.11"
 
-      - name: Install Linter tools (Cepat)
-        run: pip install pylint black isort
-
-      - name: Check formatting with Black
-        run: black --check .
-      - name: Check imports with isort
-        run: isort --check .
-      - name: Lint with Pylint
-        run: pylint src/bsort
-
-  # ---------------------------------------------------
-  # JOB 2: BUILD & TEST (HANYA JALAN JIKA LINT LOLOS)
-  # ---------------------------------------------------
-  build-and-test:
-    runs-on: ubuntu-latest
-    needs: lint  # <-- Hanya jalan jika job 'lint' sukses
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      # -----------------------------------------------------------------
+      # STEP CACHING:
+      # -----------------------------------------------------------------
+      - name: Cache pip dependencies
+        uses: actions/cache@v4
         with:
-          python-version: "3.10"
+          path: ~/.cache/pip  # Lokasi cache pip di server Linux
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/pyproject.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      # -----------------------------------------------------------------
 
-      - name: Install Project Dependencies (Lambat)
+      - name: Install Dependencies (Akan cepat setelah run pertama)
         run: |
           pip install --upgrade pip
           pip install .
-          pip install pytest # Install pytest di sini
+          pip install pytest pylint black isort # Pastikan semua alat terinstal
 
+      # LINTERS
+      - name: Check formatting with Black
+        run: black --check .
+
+      - name: Check imports with isort
+        run: isort --check .
+
+      - name: Lint with Pylint
+        run: pylint src/bsort
+
+      # TEST & BUILD
       - name: Test with Pytest
         run: pytest tests/
 
