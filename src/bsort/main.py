@@ -23,7 +23,7 @@ def load_config(config_path: Path) -> dict:
     Returns:
         dict: Konfigurasi dalam bentuk dictionary.
     """
-    with open(config_path, 'r', encoding='utf-8') as f:
+    with open(config_path, "r", encoding="utf-8") as f:
         config = yaml.safe_load(f)
     return config
 
@@ -41,7 +41,9 @@ def train(
     try:
         params = load_config(config)
     except FileNotFoundError as exc:
-        typer.secho(f"Error: File konfigurasi {config} tidak ditemukan.", fg=typer.colors.RED)
+        typer.secho(
+            f"Error: File konfigurasi {config} tidak ditemukan.", fg=typer.colors.RED
+        )
 
         raise typer.Exit(1) from exc
 
