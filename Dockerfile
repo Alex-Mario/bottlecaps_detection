@@ -1,15 +1,15 @@
-# Base image
-FROM python:3.11-slim
+# Mulai dari base image Ultralytics, ini cara termudah
+FROM ultralytics/ultralytics:latest
 
-# Set working directory di container
 WORKDIR /app
 
-# Copy semua file dari repo ke container
-COPY . .
+# Copy file-file penting
+COPY pyproject.toml .
+COPY configs/ /app/configs/
+COPY src/ /app/src/
 
-# Upgrade pip & install dependencies
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+# Install aplikasi Anda (dan dependensinya) dari pyproject.toml
+RUN pip install .
 
-# Set entrypoint agar bisa langsung pakai CLI bsort
-ENTRYPOINT ["python", "-m", "bsort.cli"]
+# Entrypoint Anda sekarang adalah perintah `bsort`
+ENTRYPOINT ["bsort"]
