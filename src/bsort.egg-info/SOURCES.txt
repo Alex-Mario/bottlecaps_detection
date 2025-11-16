@@ -1,0 +1,10 @@
+pyproject.toml
+src/bsort/__init__.py
+src/bsort/main.py
+src/bsort.egg-info/PKG-INFO
+src/bsort.egg-info/SOURCES.txt
+src/bsort.egg-info/dependency_links.txt
+src/bsort.egg-info/entry_points.txt
+src/bsort.egg-info/requires.txt
+src/bsort.egg-info/top_level.txt
+tests/test_main.py

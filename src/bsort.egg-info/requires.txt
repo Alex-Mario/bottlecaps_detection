@@ -1,0 +1,5 @@
+ultralytics
+wandb
+opencv-python-headless
+pyyaml
+typer[all]

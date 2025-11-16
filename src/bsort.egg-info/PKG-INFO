@@ -1,0 +1,9 @@
+Metadata-Version: 2.4
+Name: bsort
+Version: 0.1.0
+Summary: Bottle cap sorter ML pipeline.
+Requires-Dist: ultralytics
+Requires-Dist: wandb
+Requires-Dist: opencv-python-headless
+Requires-Dist: pyyaml
+Requires-Dist: typer[all]
