@@ -1,5 +1,6 @@
 # tests/test_main.py
 from typer.testing import CliRunner
+
 from bsort.main import app
 
 runner = CliRunner()

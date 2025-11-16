@@ -1,9 +1,11 @@
 # src/bsort/main.py
 
-import yaml
 from pathlib import Path
+
 import typer
+import yaml
 from ultralytics import YOLO
+
 import wandb  # Import W&B
 
 # Buat aplikasi Typer, ini adalah entry point CLI kita
