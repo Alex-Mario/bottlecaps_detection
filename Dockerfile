@@ -10,8 +10,8 @@ COPY src/ /app/src/
 
 # Install dependensi dari pyproject.toml
 # Ini akan otomatis meng-install ultralytics, typer, dll.
-RUN pip install --upgrade pip
-RUN pip install .
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir .
 
 # Entrypoint Anda sekarang adalah perintah `bsort`
 ENTRYPOINT ["bsort"]
