@@ -1,0 +1,21 @@
+[project]
+name = "bsort"
+version = "0.1.0"
+description = "Bottle cap sorter ML pipeline."
+dependencies = [
+    "ultralytics",
+    "wandb",
+    "opencv-python-headless",
+    "pyyaml",
+    "typer[all]",  # Pustaka untuk CLI
+]
+
+[project.scripts]
+# Ini adalah "sihir" yang membuat perintah `bsort`
+# Ini menunjuk ke variabel `app` di file `src/bsort/main.py`
+bsort = "bsort.main:app"
+
+[tool.setuptools]
+# Ini memberitahu Python di mana menemukan kode Anda
+packages = ["bsort"]
+package_dir = {"" = "src"}

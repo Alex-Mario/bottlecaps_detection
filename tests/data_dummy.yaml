@@ -1,0 +1,6 @@
+train: tests/train/images
+val: tests/val/images
+test: tests/test/images
+
+nc: 3
+names: ['light blue', 'dark blue', 'others']

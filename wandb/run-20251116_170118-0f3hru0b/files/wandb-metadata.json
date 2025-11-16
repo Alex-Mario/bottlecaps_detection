@@ -1,0 +1,34 @@
+{
+  "os": "Windows-10-10.0.26200-SP0",
+  "python": "CPython 3.11.5",
+  "startedAt": "2025-11-16T10:01:18.566351Z",
+  "program": "<python with no main file>",
+  "email": "alex.mario1404@gmail.com",
+  "root": "E:\\Object Detection\\Bottle Cap\\Bottlecaps_detection",
+  "host": "AOC",
+  "executable": "E:\\Object Detection\\Bottle Cap\\Bottlecaps_detection\\.venv\\Scripts\\python.exe",
+  "cpu_count": 6,
+  "cpu_count_logical": 12,
+  "gpu": "NVIDIA GeForce GTX 1650",
+  "gpu_count": 1,
+  "disk": {
+    "/": {
+      "total": "500104687616",
+      "used": "497823039488"
+    }
+  },
+  "memory": {
+    "total": "34180603904"
+  },
+  "gpu_nvidia": [
+    {
+      "name": "NVIDIA GeForce GTX 1650",
+      "memoryTotal": "4294967296",
+      "cudaCores": 896,
+      "architecture": "Turing",
+      "uuid": "GPU-66f9d8c9-d7bb-6f2f-ee49-3e815950d7f3"
+    }
+  ],
+  "cudaVersion": "13.0",
+  "writerId": "et5mqklo564lvwbsuoovzu8cbv80v0ug"
+}

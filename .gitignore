@@ -1,0 +1,14 @@
+# .gitignore
+__pycache__/
+.idea/
+venv/
+.env
+
+# Data & Models (JANGAN push ini)
+data/
+models/
+runs/
+*.pt
+
+# OS
+.DS_Store
