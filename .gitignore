@@ -1,14 +1,21 @@
 # .gitignore
-__pycache__/
-.idea/
-venv/
-.env
 
-# Data & Models (JANGAN push ini)
-data/
-models/
-runs/
-*.pt
+# Python
+__pycache__/
+*.pyc
+.env
+venv/
+.venv/
 
 # OS
 .DS_Store
+
+# IDE
+.idea/
+.vscode/
+
+# Data, Model, & Logs (INI YANG PENTING)
+Data/
+models/
+runs/
+wandb/
