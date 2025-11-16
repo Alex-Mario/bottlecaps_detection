@@ -1,37 +1,50 @@
-# .github/workflows/ci.yml
 name: Python CI
-
 on: [push, pull_request]
 
 jobs:
-  lint-test-build:
+  # ---------------------------------------------------
+  # JOB 1: LINTING (SUPER CEPAT, JALAN DULUAN)
+  # ---------------------------------------------------
+  lint:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: "3.10"
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
 
-    - name: Install dependencies
-      run: |
-        pip install --upgrade pip
-        pip install .[dev]  # (Anda perlu tambahkan dependensi dev di pyproject.toml)
-        # Atau cara mudah:
-        pip install .
-        pip install pylint black isort pytest
+      - name: Install Linter tools (Cepat)
+        run: pip install pylint black isort
 
-    - name: Check formatting with Black
-      run: black --check .
+      - name: Check formatting with Black
+        run: black --check .
+      - name: Check imports with isort
+        run: isort --check .
+      - name: Lint with Pylint
+        run: pylint src/bsort
 
-    - name: Check imports with isort
-      run: isort --check .
+  # ---------------------------------------------------
+  # JOB 2: BUILD & TEST (HANYA JALAN JIKA LINT LOLOS)
+  # ---------------------------------------------------
+  build-and-test:
+    runs-on: ubuntu-latest
+    needs: lint  # <-- Hanya jalan jika job 'lint' sukses
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
 
-    - name: Lint with Pylint
-      run: pylint src/bsort
+      - name: Install Project Dependencies (Lambat)
+        run: |
+          pip install --upgrade pip
+          pip install .
+          pip install pytest # Install pytest di sini
 
-    - name: Test with Pytest
-      run: pytest tests/
+      - name: Test with Pytest
+        run: pytest tests/
 
-    - name: Build Docker image
-      run: docker build . --file Dockerfile --tag bsort-image:latest
+      - name: Build Docker image
+        run: docker build . --file Dockerfile --tag bsort-image:latest
