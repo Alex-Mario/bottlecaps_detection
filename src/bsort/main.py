@@ -30,9 +30,9 @@ def load_config(config_path: Path) -> dict:
 
 @app.command()
 def train(
-        config: Path = typer.Option(
-            "configs/settings.yaml", "--config", help="Path ke file settings.yaml."
-        )
+    config: Path = typer.Option(
+        "configs/settings.yaml", "--config", help="Path ke file settings.yaml."
+    )
 ):
     """
     Melatih model DAN otomatis mengekspor ke ONNX ke folder 'models/'.
@@ -77,7 +77,9 @@ def train(
         # 1. Pindahkan best.pt ke models/
         target_pt_path = models_folder / best_pt_path.name  # (e.g., models/best.pt)
         best_pt_path.replace(target_pt_path)
-        typer.secho(f"Best model dipindahkan ke: {target_pt_path}", fg=typer.colors.GREEN)
+        typer.secho(
+            f"Best model dipindahkan ke: {target_pt_path}", fg=typer.colors.GREEN
+        )
 
         # 2. Export ke ONNX
         # model.export() akan meng-export model yang ada di memori
@@ -88,22 +90,23 @@ def train(
         original_onnx_path = Path(original_onnx_path_str)
 
         # 3. Pindahkan file .onnx ke folder models/
-        target_onnx_path = models_folder / original_onnx_path.name  # (e.g., models/best.onnx)
+        target_onnx_path = (
+            models_folder / original_onnx_path.name
+        )  # (e.g., models/best.onnx)
         original_onnx_path.replace(target_onnx_path)
 
-        typer.secho(f"ONNX model disimpan di: {target_onnx_path}", fg=typer.colors.GREEN)
+        typer.secho(
+            f"ONNX model disimpan di: {target_onnx_path}", fg=typer.colors.GREEN
+        )
 
     else:
         typer.secho(
             f"Error: best.pt tidak ditemukan di path: {best_pt_path}",
-            fg=typer.colors.RED
+            fg=typer.colors.RED,
         )
         typer.secho("Export ONNX dibatalkan.", fg=typer.colors.RED)
 
-    typer.secho(
-        "Proses training dan export selesai.", fg=typer.colors.GREEN
-    )
-
+    typer.secho("Proses training dan export selesai.", fg=typer.colors.GREEN)
 
 
 @app.command()
