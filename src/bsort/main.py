@@ -1,3 +1,5 @@
+"""CLI program for bottle cap detection (training and inference)."""
+
 # src/bsort/main.py
 
 from pathlib import Path
@@ -21,7 +23,7 @@ def load_config(config_path: Path) -> dict:
     Returns:
         dict: Konfigurasi dalam bentuk dictionary.
     """
-    with open(config_path, "r") as f:
+    with open(config_path, 'r', encoding='utf-8') as f:
         config = yaml.safe_load(f)
     return config
 
@@ -38,11 +40,10 @@ def train(
     typer.echo(f"Memuat konfigurasi dari: {config}")
     try:
         params = load_config(config)
-    except FileNotFoundError:
-        typer.secho(
-            f"Error: File konfigurasi {config} tidak ditemukan.", fg=typer.colors.RED
-        )
-        raise typer.Exit(1)
+    except FileNotFoundError as exc:
+        typer.secho(f"Error: File konfigurasi {config} tidak ditemukan.", fg=typer.colors.RED)
+
+        raise typer.Exit(1) from exc
 
     typer.echo("Logging in to W&B...")
     wandb.login()
@@ -97,7 +98,7 @@ def infer(
     results = model(image, conf=params["infer"]["confidence_threshold"])
 
     results[0].show()
-    typer.secho(f"Inferensi selesai.", fg=typer.colors.GREEN)
+    typer.secho("Inferensi selesai.", fg=typer.colors.GREEN)
 
 
 if __name__ == "__main__":
