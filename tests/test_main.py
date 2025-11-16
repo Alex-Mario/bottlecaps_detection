@@ -4,6 +4,7 @@ from bsort.main import app
 
 runner = CliRunner()
 
+
 def test_cli_help():
     """Tes apakah perintah --help berjalan."""
     result = runner.invoke(app, ["--help"])
