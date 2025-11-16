@@ -1,0 +1,32 @@
+data:
+  data_config_file: "data.yaml"   # Path ke data.yaml
+  train_path: "train"             # Folder train
+  val_path: "valid"               # Folder validasi
+  test_path: "test"               # Folder test
+
+model:
+  pretrained: "yolov8n.pt"       # Model backbone YOLOv8
+  imgsz: 224                      # Ukuran input gambar
+  lr0: 0.0001                     # Learning rate awal
+  optimizer: "Adam"
+  dropout: 0.15
+  patience: 20
+
+train:
+  epochs: 100
+  batch_size: 16                  # Batch size untuk training
+  wandb_project: "Bottle-Caps-Detection"
+  run_name: "run5"                # Nama run
+
+infer:
+  model_weights: "models/best.onnx" # Path ke model yang sudah dilatih
+  confidence_threshold: 0.25      # Threshold deteksi
+  iou_threshold: 0.45             # Threshold NMS
+##  image_size: 640                  # Resize gambar saat inference (tidak berpengaruh jika format model onnx)
+#  augment: false                  # Augmentasi saat inference
+#  device: "cpu"                   # "cpu" atau "cuda"
+#  half_precision: true            # Gunakan half precision jika mendukung
+#  batch_size: 1
+
+wandb:
+  project: "Bottle-Caps-Detection"

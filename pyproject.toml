@@ -8,10 +8,12 @@ dependencies = [
     "opencv-python-headless",
     "pyyaml",
     "typer[all]",  # Pustaka untuk CLI
+    "onnx",
+    "onnxruntime"
 ]
 
 [project.scripts]
-# Ini adalah "sihir" yang membuat perintah `bsort`
+# Ini adalah "sihir/magic" yang membuat perintah `bsort`
 # Ini menunjuk ke variabel `app` di file `src/bsort/main.py`
 bsort = "bsort.main:app"
 

@@ -30,12 +30,12 @@ def load_config(config_path: Path) -> dict:
 
 @app.command()
 def train(
-    config: Path = typer.Option(
-        "configs/settings.yaml", "--configs", help="Path ke file settings.yaml."
-    )
+        config: Path = typer.Option(
+            "configs/settings.yaml", "--config", help="Path ke file settings.yaml."
+        )
 ):
     """
-    Melatih model YOLO berdasarkan file konfigurasi.
+    Melatih model DAN otomatis mengekspor ke ONNX ke folder 'models/'.
     """
     typer.echo(f"Memuat konfigurasi dari: {config}")
     try:
@@ -44,34 +44,72 @@ def train(
         typer.secho(
             f"Error: File konfigurasi {config} tidak ditemukan.", fg=typer.colors.RED
         )
-
         raise typer.Exit(1) from exc
 
     typer.echo("Logging in to W&B...")
     wandb.login()
 
-    model = YOLO(params["model"]["base_model"])
+    model = YOLO(params["model"]["pretrained"])
+    imgsz = params["model"]["imgsz"]  # Ambil imgsz untuk export
 
     typer.echo("Memulai pelatihan model...")
+    # 'model' akan di-update 'in-place' dengan bobot terbaik setelah training
     model.train(
         data=params["data"]["data_config_file"],
         epochs=params["train"]["epochs"],
         batch=params["train"]["batch_size"],
-        imgsz=params["model"]["imgsz"],
+        imgsz=imgsz,
         project=params["train"]["wandb_project"],
-        name="cli_train_run",
+        # patience=params["model"]["patience"],
+        name="cli_train_run4",
     )
 
+    typer.echo("Pelatihan selesai. Memindahkan model...")
+
+    # Dapatkan path ke best.pt secara dinamis
+    # Ini jauh lebih aman daripada hardcoding path
+    best_pt_path = Path(model.trainer.best)
+
+    models_folder = Path("models")
+    models_folder.mkdir(exist_ok=True)  # Buat folder 'models/' jika belum ada
+
+    if best_pt_path.exists():
+        # 1. Pindahkan best.pt ke models/
+        target_pt_path = models_folder / best_pt_path.name  # (e.g., models/best.pt)
+        best_pt_path.replace(target_pt_path)
+        typer.secho(f"Best model dipindahkan ke: {target_pt_path}", fg=typer.colors.GREEN)
+
+        # 2. Export ke ONNX
+        # model.export() akan meng-export model yang ada di memori
+        # dan me-return string path ke file .onnx yang baru dibuat
+        typer.echo("Mengekspor model ke ONNX...")
+        original_onnx_path_str = model.export(format="onnx", imgsz=imgsz)
+
+        original_onnx_path = Path(original_onnx_path_str)
+
+        # 3. Pindahkan file .onnx ke folder models/
+        target_onnx_path = models_folder / original_onnx_path.name  # (e.g., models/best.onnx)
+        original_onnx_path.replace(target_onnx_path)
+
+        typer.secho(f"ONNX model disimpan di: {target_onnx_path}", fg=typer.colors.GREEN)
+
+    else:
+        typer.secho(
+            f"Error: best.pt tidak ditemukan di path: {best_pt_path}",
+            fg=typer.colors.RED
+        )
+        typer.secho("Export ONNX dibatalkan.", fg=typer.colors.RED)
+
     typer.secho(
-        "Pelatihan selesai. Model terbaik ada di folder 'runs/'.", fg=typer.colors.GREEN
+        "Proses training dan export selesai.", fg=typer.colors.GREEN
     )
-    typer.echo("PENTING: Pindahkan 'best.pt' ke 'models/' dan update 'settings.yaml'.")
+
 
 
 @app.command()
 def infer(
     config: Path = typer.Option(
-        "configs/settings.yaml", "--configs", help="Path ke file settings.yaml."
+        "configs/settings.yaml", "--config", help="Path ke file settings.yaml."
     ),
     image: Path = typer.Option(
         ..., "--image", help="Path ke gambar yang ingin diprediksi."
@@ -97,7 +135,16 @@ def infer(
     model = YOLO(model_path)
 
     typer.echo(f"Menjalankan inferensi pada {image}...")
-    results = model(image, conf=params["infer"]["confidence_threshold"])
+    results = model(
+        image,
+        conf=params["infer"]["confidence_threshold"],
+        iou=params["infer"]["iou_threshold"],
+        # # imgsz=params["infer"]["image_size"], #(tidak berpengaruh jika format model onnx)
+        # device=params["infer"]["device"],
+        # half=params["infer"]["half_precision"],
+        # augment=params["infer"]["augment"],
+        # batch=params["infer"]["batch_size"]
+    )
 
     results[0].show()
     typer.secho("Inferensi selesai.", fg=typer.colors.GREEN)
