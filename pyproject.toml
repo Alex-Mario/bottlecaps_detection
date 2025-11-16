@@ -17,3 +17,6 @@ bsort = "bsort.main:app"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
+
+[tool.isort]
+profile = "black"
