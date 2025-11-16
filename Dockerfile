@@ -1,5 +1,5 @@
-# Mulai dari base image Ultralytics, ini cara termudah
-FROM ultralytics/ultralytics:latest
+# Mulai dari base image python 3.11-slim
+FROM python:3.11-slim
 
 WORKDIR /app
 
@@ -8,7 +8,9 @@ COPY pyproject.toml .
 COPY configs/ /app/configs/
 COPY src/ /app/src/
 
-# Install aplikasi Anda (dan dependensinya) dari pyproject.toml
+# Install dependensi dari pyproject.toml
+# Ini akan otomatis meng-install ultralytics, typer, dll.
+RUN pip install --upgrade pip
 RUN pip install .
 
 # Entrypoint Anda sekarang adalah perintah `bsort`
