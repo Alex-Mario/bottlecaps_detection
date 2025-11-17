@@ -13,7 +13,7 @@ Includes a reproducible ML pipeline, CLI (`bsort`), Docker, and CI templates.
 
  4. [Modeling Approach](#modeling-approach)
 
- 5. [Results Summary & Limitations](#results-summary-&-limitations)
+ 5. [Results Summary & Limitations](#results-summary--limitations)
 
  6. [Repo Structure](#repo-structure)
 
@@ -25,7 +25,7 @@ Includes a reproducible ML pipeline, CLI (`bsort`), Docker, and CI templates.
 
 10. [Docker](#docker)
 
-11. [CI/CD](#ci/cd)
+11. [CI/CD](#cicd)
 
 12. [License](#license)
 
@@ -165,6 +165,7 @@ Because validation and test sets contain only one image, numerical metrics like 
 
 ## Repo Structure
 
+```
 .
 ├── .github/workflows/    # CI/CD (ci.yaml)
 ├── bsort/                # Source code for the CLI and Logic
@@ -175,6 +176,8 @@ Because validation and test sets contain only one image, numerical metrics like 
 ├── Dockerfile            # Docker configuration
 ├── setup.py              # Package installation
 └── README.md
+```
+
 
 ## Installation
 
@@ -197,7 +200,7 @@ pip install -e .
 All parameters are stored in: `configs/settings.yaml`
 
 **Example:**
-
+```
 dataset_path: "data/"
 epochs: 100
 batch_size: 16
@@ -208,7 +211,7 @@ dropout: 0.15
 patience: 20
 wandb_project: "Bottle-Caps-Detection"
 run_name: "run1"
-
+```
 
 ## Usage
 
