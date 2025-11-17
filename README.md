@@ -52,7 +52,7 @@ A complete ML engineering pipeline is provided:
 
 * Automated linting, formatting, testing & Docker build
 
-## ⭐ Key Features
+## Key Features
 
 * ✅ **YOLOv8n-based** object detector
 
