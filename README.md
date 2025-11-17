@@ -7,7 +7,7 @@ Includes a reproducible ML pipeline, CLI (`bsort`), Docker, and CI templates.
 
  1. [Project Summary](#project-summary)
 
- 2. [Key Features](https://www.google.com/search?q=%23-key-features)
+ 2. [Key Features](#key-features)
 
  3. [Dataset](https://www.google.com/search?q=%23-dataset)
 
