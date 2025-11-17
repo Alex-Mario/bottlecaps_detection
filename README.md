@@ -165,8 +165,16 @@ Because validation and test sets contain only one image, numerical metrics like 
 
 ## 📂 Repo Structure
 
-. ├── .github/workflows/ # CI/CD (ci.yaml) ├── bsort/ # Source code for the CLI and Logic ├── configs/ # Configuration files (settings.yaml) ├── data/ # Dataset folder ├── models/ # Saved models ├── tests/ # Unit tests ├── Dockerfile # Docker configuration ├── setup.py # Package installation └── README.md
-
+.
+├── .github/workflows/    # CI/CD (ci.yaml)
+├── bsort/                # Source code for the CLI and Logic
+├── configs/              # Configuration files (settings.yaml)
+├── data/                 # Dataset folder
+├── models/               # Saved models
+├── tests/                # Unit tests
+├── Dockerfile            # Docker configuration
+├── setup.py              # Package installation
+└── README.md
 
 ## 🚀 Installation
 
@@ -190,7 +198,16 @@ All parameters are stored in: `configs/settings.yaml`
 
 **Example:**
 
-dataset_path: "data/" epochs: 100 batch_size: 16 learning_rate: 0.0001 imgsz: 224 optimizer: "Adam" dropout: 0.15 patience: 20 wandb_project: "Bottle-Caps-Detection" run_name: "run1"
+dataset_path: "data/"
+epochs: 100
+batch_size: 16
+learning_rate: 0.0001
+imgsz: 224
+optimizer: "Adam"
+dropout: 0.15
+patience: 20
+wandb_project: "Bottle-Caps-Detection"
+run_name: "run1"
 
 
 ## ▶️ Usage
@@ -202,7 +219,7 @@ bsort --help
 
 ### 🏋️ Training
 
-bsort train --config configs/settings.yaml
+`bsort train --config configs/settings.yaml`
 
 
 **Training outputs:**
