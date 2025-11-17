@@ -9,25 +9,25 @@ Includes a reproducible ML pipeline, CLI (`bsort`), Docker, and CI templates.
 
  2. [Key Features](#key-features)
 
- 3. [Dataset](https://www.google.com/search?q=%23-dataset)
+ 3. [Dataset](#dataset)
 
- 4. [Modeling Approach](https://www.google.com/search?q=%23-modeling-approach)
+ 4. [Modeling Approach](#modeling-approach)
 
- 5. [Results Summary & Limitations](https://www.google.com/search?q=%23-results-summary--limitations)
+ 5. [Results Summary & Limitations](#results-and-summary)
 
- 6. [Repo Structure](https://www.google.com/search?q=%23-repo-structure)
+ 6. [Repo Structure](#repo-structure)
 
- 7. [Installation](https://www.google.com/search?q=%23-installation)
+ 7. [Installation](#installation)
 
- 8. [Configuration](https://www.google.com/search?q=%23-configuration)
+ 8. [Configuration](#configuration)
 
- 9. [Usage](https://www.google.com/search?q=%23-usage)
+ 9. [Usage](#usage)
 
-10. [Docker](https://www.google.com/search?q=%23-docker)
+10. [Docker](#docker)
 
-11. [CI/CD](https://www.google.com/search?q=%23-cicd-pipeline)
+11. [CI/CD](#ci-cd)
 
-12. [License](https://www.google.com/search?q=%23-license)
+12. [License](#license)
 
 ## Project Summary
 
@@ -78,7 +78,7 @@ A complete ML engineering pipeline is provided:
 
   * Docker image build
 
-## 📊 Dataset
+## Dataset
 
 **Dataset Characteristics:**
 
@@ -110,7 +110,7 @@ A complete ML engineering pipeline is provided:
 
 *Due to the extremely small dataset, results primarily serve demonstration purposes.*
 
-## 🧠 Modeling Approach
+## Modeling Approach
 
 * **Base model:** YOLOv8n (lightest & fastest)
 
@@ -138,7 +138,7 @@ Training command example:
 
 bsort train --config configs/settings.yaml
 
-## 📈 Results Summary & Limitations
+## Results Summary & Limitations
 
 Because validation and test sets contain only one image, numerical metrics like mAP/precision/recall are not statistically meaningful.
 
@@ -163,7 +163,7 @@ Because validation and test sets contain only one image, numerical metrics like 
 **Inference speed (i5 12400f):**
 **6–8 ms/frame** → meets Raspberry Pi 5 requirement.
 
-## 📂 Repo Structure
+## Repo Structure
 
 .
 ├── .github/workflows/    # CI/CD (ci.yaml)
@@ -176,7 +176,7 @@ Because validation and test sets contain only one image, numerical metrics like 
 ├── setup.py              # Package installation
 └── README.md
 
-## 🚀 Installation
+## Installation
 
 **1. Clone the repo**
 
@@ -192,7 +192,7 @@ Or install in editable mode (for development)
 pip install -e .
 
 
-## 🔧 Configuration
+## Configuration
 
 All parameters are stored in: `configs/settings.yaml`
 
@@ -210,14 +210,14 @@ wandb_project: "Bottle-Caps-Detection"
 run_name: "run1"
 
 
-## ▶️ Usage
+## Usage
 
 List available commands:
 
 `bsort --help`
 
 
-### 🏋️ Training
+### Training
 
 `bsort train --config configs/settings.yaml`
 
@@ -230,7 +230,7 @@ List available commands:
 
 * Convert the model to ONNX format
 
-### 🔍 Inference
+### Inference
 
 bsort infer --config configs/settings.yaml --image sample.jpg
 
@@ -245,7 +245,7 @@ The model will:
 
 4. Show the result
 
-## 🐳 Docker
+## Docker
 
 **Build image:**
 
@@ -257,7 +257,7 @@ docker build -t bsort .
 `docker run -it bsort python -m bsort --help`
 
 
-## 🔄 CI/CD Pipeline
+## CI/CD Pipeline
 
 GitHub Action (`.github/workflows/ci.yaml`) includes:
 
@@ -277,6 +277,6 @@ Pipeline runs on every:
 
 * `pull request`
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License.
