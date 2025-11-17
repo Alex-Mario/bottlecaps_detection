@@ -29,7 +29,7 @@ Includes a reproducible ML pipeline, CLI (`bsort`), Docker, and CI templates.
 
 12. [License](https://www.google.com/search?q=%23-license)
 
-## 📝 Project Summary
+## Project Summary
 
 This project aims to build a real-time computer vision model to detect bottle caps and classify them into:
 
