@@ -76,7 +76,7 @@ A complete ML engineering pipeline is provided:
 
   * `pytest`
 
-  * Docker image build
+  * `Docker image build`
 
 ## Dataset
 
