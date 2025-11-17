@@ -25,7 +25,7 @@ Includes a reproducible ML pipeline, CLI (`bsort`), Docker, and CI templates.
 
 10. [Docker](#docker)
 
-11. [CI/CD](#ci--cd)
+11. [CI/CD](#ci-cd)
 
 12. [License](#license)
 
