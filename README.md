@@ -214,7 +214,7 @@ run_name: "run1"
 
 List available commands:
 
-bsort --help
+`bsort --help`
 
 
 ### 🏋️ Training
@@ -254,7 +254,7 @@ docker build -t bsort .
 
 **Run container:**
 
-docker run -it bsort python -m bsort --help
+`docker run -it bsort python -m bsort --help`
 
 
 ## 🔄 CI/CD Pipeline
@@ -269,7 +269,7 @@ GitHub Action (`.github/workflows/ci.yaml`) includes:
 
 * `pytest` → run unit tests
 
-* Build Docker image automatically
+* `Build Docker image automatically`
 
 Pipeline runs on every:
 
