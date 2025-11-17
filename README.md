@@ -13,7 +13,7 @@ Includes a reproducible ML pipeline, CLI (`bsort`), Docker, and CI templates.
 
  4. [Modeling Approach](#modeling-approach)
 
- 5. [Results Summary & Limitations](#results-and-summary)
+ 5. [Results Summary & Limitations](#results-summary-&-limitations)
 
  6. [Repo Structure](#repo-structure)
 
@@ -25,7 +25,7 @@ Includes a reproducible ML pipeline, CLI (`bsort`), Docker, and CI templates.
 
 10. [Docker](#docker)
 
-11. [CI/CD](#ci-cd)
+11. [CI/CD](#ci/cd)
 
 12. [License](#license)
 
