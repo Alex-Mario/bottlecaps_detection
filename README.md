@@ -174,7 +174,6 @@ Because validation and test sets contain only one image, numerical metrics like 
 ├── models/               # Saved models
 ├── tests/                # Unit tests
 ├── Dockerfile            # Docker configuration
-├── setup.py              # Package installation
 └── README.md
 ```
 
