@@ -234,7 +234,7 @@ List available commands:
 
 ### Inference
 
-bsort infer --config configs/settings.yaml --image sample.jpg
+`bsort infer --config configs/settings.yaml --image sample.jpg`
 
 
 The model will:
