@@ -168,7 +168,7 @@ Because validation and test sets contain only one image, numerical metrics like 
 ```
 .
 ├── .github/workflows/    # CI/CD (ci.yaml)
-├── bsort/                # Source code for the CLI and Logic
+├── src/bsort/                # Source code for the CLI and Logic
 ├── configs/              # Configuration files (settings.yaml)
 ├── data/                 # Dataset folder
 ├── models/               # Saved models
