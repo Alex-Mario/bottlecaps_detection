@@ -6,9 +6,10 @@ from pathlib import Path
 
 import cv2
 import typer
-import wandb
 import yaml
 from ultralytics import YOLO
+
+import wandb
 
 # Buat aplikasi Typer, ini adalah entry point CLI kita
 app = typer.Typer(help="CLI untuk training dan inferensi model deteksi tutup botol.")

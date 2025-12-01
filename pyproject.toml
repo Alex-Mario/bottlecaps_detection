@@ -22,3 +22,8 @@ package-dir = {"" = "src"}
 
 [tool.isort]
 profile = "black"
+
+[tool.pylint.'MESSAGES CONTROL']
+disable = [
+    "no-member",
+]
