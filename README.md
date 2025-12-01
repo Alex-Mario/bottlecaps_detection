@@ -236,6 +236,9 @@ List available commands:
 
 `bsort infer --config configs/settings.yaml --image sample.jpg`
 
+### Realtime camera detection
+`bsort realtime`
+
 
 The model will:
 
