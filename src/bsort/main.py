@@ -4,6 +4,7 @@
 
 from pathlib import Path
 
+import cv2
 import typer
 import wandb
 import yaml
@@ -151,6 +152,61 @@ def infer(
 
     results[0].show()
     typer.secho("Inferensi selesai.", fg=typer.colors.GREEN)
+
+@app.command()
+def realtime(
+    config: Path = typer.Option(
+        "configs/settings.yaml", "--config", help="Path ke file settings.yaml."
+    ),
+):
+    """
+    Menjalankan real-time inference menggunakan webcam secara langsung.
+    """
+
+    params = load_config(config)
+    model_path = params["infer"]["model_weights"]
+
+    if not Path(model_path).exists():
+        typer.secho(f"Error: Model {model_path} tidak ditemukan.", fg=typer.colors.RED)
+        raise typer.Exit(1)
+
+    typer.echo(f"Memuat model dari {model_path}...")
+    model = YOLO(model_path)
+
+    cap = cv2.VideoCapture(0)  # 0 = default webcam
+
+    if not cap.isOpened():
+        typer.secho("Error: Webcam tidak dapat diakses!", fg=typer.colors.RED)
+        raise typer.Exit(1)
+
+    typer.secho("Real-time detection dimulai. Tekan 'q' untuk keluar.", fg=typer.colors.GREEN)
+
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            typer.secho("Tidak dapat membaca frame dari kamera.", fg=typer.colors.RED)
+            break
+
+        # Jalankan prediksi YOLO ke frame
+        results = model.predict(
+            frame,
+            conf=params["infer"]["confidence_threshold"],
+            iou=params["infer"]["iou_threshold"],
+        )
+
+        # Tampilkan hasil
+        annotated_frame = results[0].plot()
+
+        cv2.imshow("Bottle Cap Detection - Real Time", annotated_frame)
+
+        # Keluar dengan tombol 'q'
+        if cv2.waitKey(1) & 0xFF == ord("q"):
+            break
+
+    cap.release()
+    cv2.destroyAllWindows()
+    typer.secho("Real-time inferensi dihentikan.", fg=typer.colors.GREEN)
+
 
 
 if __name__ == "__main__":
