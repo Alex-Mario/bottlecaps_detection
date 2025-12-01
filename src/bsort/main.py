@@ -6,8 +6,8 @@ from pathlib import Path
 
 import cv2
 import typer
-import yaml
 from ultralytics import YOLO
+import yaml
 
 import wandb
 
@@ -173,7 +173,7 @@ def realtime(
         raise typer.Exit(1)
 
     typer.echo(f"Memuat model dari {model_path}...")
-    model = YOLO(model_path)
+    model = YOLO(model_path, task="detect")
 
     cap = cv2.VideoCapture(0)  # 0 = default webcam
 
