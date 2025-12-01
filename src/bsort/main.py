@@ -153,6 +153,7 @@ def infer(
     results[0].show()
     typer.secho("Inferensi selesai.", fg=typer.colors.GREEN)
 
+
 @app.command()
 def realtime(
     config: Path = typer.Option(
@@ -179,7 +180,9 @@ def realtime(
         typer.secho("Error: Webcam tidak dapat diakses!", fg=typer.colors.RED)
         raise typer.Exit(1)
 
-    typer.secho("Real-time detection dimulai. Tekan 'q' untuk keluar.", fg=typer.colors.GREEN)
+    typer.secho(
+        "Real-time detection dimulai. Tekan 'q' untuk keluar.", fg=typer.colors.GREEN
+    )
 
     while True:
         ret, frame = cap.read()
@@ -206,7 +209,6 @@ def realtime(
     cap.release()
     cv2.destroyAllWindows()
     typer.secho("Real-time inferensi dihentikan.", fg=typer.colors.GREEN)
-
 
 
 if __name__ == "__main__":
