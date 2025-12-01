@@ -37,7 +37,7 @@ def train(
     )
 ):
     """
-    Melatih model DAN otomatis mengekspor ke ONNX ke folder 'models/'.
+    Melatih model dan otomatis mengeksport ke ONNX ke folder 'models/'.
     """
     typer.echo(f"Memuat konfigurasi dari: {config}")
     try:
